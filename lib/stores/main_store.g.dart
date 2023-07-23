@@ -9,18 +9,35 @@ part of 'main_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$MainStore on MainStoreBase, Store {
-  late final _$modeAtom = Atom(name: 'MainStoreBase.mode', context: context);
+  late final _$currentModeAtom =
+      Atom(name: 'MainStoreBase.currentMode', context: context);
 
   @override
-  String get mode {
-    _$modeAtom.reportRead();
-    return super.mode;
+  String get currentMode {
+    _$currentModeAtom.reportRead();
+    return super.currentMode;
   }
 
   @override
-  set mode(String value) {
-    _$modeAtom.reportWrite(value, super.mode, () {
-      super.mode = value;
+  set currentMode(String value) {
+    _$currentModeAtom.reportWrite(value, super.currentMode, () {
+      super.currentMode = value;
+    });
+  }
+
+  late final _$currentTimerAtom =
+      Atom(name: 'MainStoreBase.currentTimer', context: context);
+
+  @override
+  int get currentTimer {
+    _$currentTimerAtom.reportRead();
+    return super.currentTimer;
+  }
+
+  @override
+  set currentTimer(int value) {
+    _$currentTimerAtom.reportWrite(value, super.currentTimer, () {
+      super.currentTimer = value;
     });
   }
 
@@ -28,11 +45,11 @@ mixin _$MainStore on MainStoreBase, Store {
       ActionController(name: 'MainStoreBase', context: context);
 
   @override
-  dynamic setMode(String value) {
+  dynamic setCurrentMode(String value) {
     final _$actionInfo = _$MainStoreBaseActionController.startAction(
-        name: 'MainStoreBase.setMode');
+        name: 'MainStoreBase.setCurrentMode');
     try {
-      return super.setMode(value);
+      return super.setCurrentMode(value);
     } finally {
       _$MainStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -52,7 +69,8 @@ mixin _$MainStore on MainStoreBase, Store {
   @override
   String toString() {
     return '''
-mode: ${mode}
+currentMode: ${currentMode},
+currentTimer: ${currentTimer}
     ''';
   }
 }

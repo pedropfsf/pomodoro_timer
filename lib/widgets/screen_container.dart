@@ -20,7 +20,8 @@ class ScreenContainer extends StatelessWidget {
 
     return MaterialApp(
       home: Scaffold(
-        body: Container(
+        body: AnimatedContainer(
+          duration: const Duration(seconds: 1),
           width: double.infinity,
           color: color,
           padding: padding,

@@ -6,12 +6,14 @@ class MainStore = MainStoreBase with _$MainStore;
 
 abstract class MainStoreBase with Store {
   @observable
-  String mode = 'focus';
+  String currentMode = 'focus';
+
+  @observable
   int currentTimer = 0;
 
   @action
-  setMode(String value) {
-    mode = value;
+  setCurrentMode(String value) {
+    currentMode = value;
   }
 
   @action

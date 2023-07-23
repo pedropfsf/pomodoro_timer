@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro_timer/utils/colors.dart';
+import 'package:pomodoro_timer/utils/timer.dart';
 import 'package:pomodoro_timer/widgets/button_arrow.dart';
 
 class ButtonTimer extends StatelessWidget {
@@ -21,6 +22,10 @@ class ButtonTimer extends StatelessWidget {
     fontSize: 58,
   );
 
+  String getTimer() {
+    return getTimerBySeconds(timer);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -30,7 +35,7 @@ class ButtonTimer extends StatelessWidget {
         TextButton(
           onPressed: () {},
           style: buttonStyle,
-          child: Text('00:00', style: textStyle),
+          child: Text(getTimer(), style: textStyle),
         ),
         ButtonArrow(direction: 'right')
       ],
