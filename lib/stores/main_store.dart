@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:pomodoro_timer/utils/ways.dart';
 
 part 'main_store.g.dart';
 
@@ -6,19 +7,19 @@ class MainStore = MainStoreBase with _$MainStore;
 
 abstract class MainStoreBase with Store {
   @observable
-  List<String> ways = ['focus', 'short-pause', 'long-pause'];
+  List ways = [FocusMode(), ShortPauseMode(), LongPauseMode()];
 
   @observable
   int index = 0;
 
   @observable
-  String currentMode = 'focus';
+  Mode currentMode = getMode('focus');
 
   @observable
   int currentTimer = 0;
 
   @action
-  setCurrentMode(String value) {
+  setCurrentMode(Mode value) {
     currentMode = value;
   }
 
@@ -32,7 +33,7 @@ abstract class MainStoreBase with Store {
     if (index < 2) {
       index++;
     }
-    currentMode = ways.elementAt(index);
+    setCurrentMode(ways.elementAt(index));
   }
 
   @action
@@ -40,6 +41,6 @@ abstract class MainStoreBase with Store {
     if (index > 0) {
       index--;
     }
-    currentMode = ways.elementAt(index);
+    setCurrentMode(ways.elementAt(index));
   }
 }

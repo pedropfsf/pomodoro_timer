@@ -12,13 +12,13 @@ mixin _$MainStore on MainStoreBase, Store {
   late final _$waysAtom = Atom(name: 'MainStoreBase.ways', context: context);
 
   @override
-  List<String> get ways {
+  List<dynamic> get ways {
     _$waysAtom.reportRead();
     return super.ways;
   }
 
   @override
-  set ways(List<String> value) {
+  set ways(List<dynamic> value) {
     _$waysAtom.reportWrite(value, super.ways, () {
       super.ways = value;
     });
@@ -43,13 +43,13 @@ mixin _$MainStore on MainStoreBase, Store {
       Atom(name: 'MainStoreBase.currentMode', context: context);
 
   @override
-  String get currentMode {
+  Mode get currentMode {
     _$currentModeAtom.reportRead();
     return super.currentMode;
   }
 
   @override
-  set currentMode(String value) {
+  set currentMode(Mode value) {
     _$currentModeAtom.reportWrite(value, super.currentMode, () {
       super.currentMode = value;
     });
@@ -75,7 +75,7 @@ mixin _$MainStore on MainStoreBase, Store {
       ActionController(name: 'MainStoreBase', context: context);
 
   @override
-  dynamic setCurrentMode(String value) {
+  dynamic setCurrentMode(Mode value) {
     final _$actionInfo = _$MainStoreBaseActionController.startAction(
         name: 'MainStoreBase.setCurrentMode');
     try {
