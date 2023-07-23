@@ -22,8 +22,6 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    final mode = getMode('short-pause');
-
     return ScreenContainer(
       color: mode.color,
       children: [
