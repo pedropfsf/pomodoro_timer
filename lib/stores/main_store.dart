@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:mobx/mobx.dart';
 import 'package:pomodoro_timer/services/colors.dart';
 import 'package:pomodoro_timer/services/ways.dart';
@@ -11,6 +13,9 @@ class MainStore = MainStoreBase with _$MainStore;
 
 abstract class MainStoreBase with Store {
   @observable
+  Timer? interval;
+
+  @observable
   Ways mode = Ways.focus;
 
   @observable
@@ -18,6 +23,9 @@ abstract class MainStoreBase with Store {
 
   @observable
   int timer = 1500;
+
+  @observable
+  bool isPause = true;
 
   @action
   toFocus() {
@@ -44,5 +52,20 @@ abstract class MainStoreBase with Store {
     color = mode.color;
     timer = mode.timer;
     this.mode = Ways.longPause;
+  }
+
+  @action
+  play() {
+    isPause = false;
+    const duration = Duration(seconds: 2);
+    interval = Timer(duration, () {
+      timer -= 1;
+    });
+  }
+
+  @action
+  pause() {
+    isPause = true;
+    interval?.cancel();
   }
 }

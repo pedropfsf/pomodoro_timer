@@ -2,12 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:pomodoro_timer/services/colors.dart';
 
 class ButtonPlay extends StatelessWidget {
-  const ButtonPlay({super.key});
+  const ButtonPlay({
+    super.key,
+    this.isPause,
+    this.onPlay,
+  });
+
+  final bool? isPause;
+  final Function()? onPlay;
+
+  IconData getIcon() {
+    if (isPause == null) {
+      return Icons.play_arrow;
+    }
+
+    if (isPause == true) {
+      return Icons.pause;
+    }
+
+    return Icons.play_arrow;
+  }
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: onPlay,
       style: IconButton.styleFrom(
         backgroundColor: colors['alpha'],
         shape: const RoundedRectangleBorder(
@@ -18,7 +37,7 @@ class ButtonPlay extends StatelessWidget {
         padding: const EdgeInsets.all(10),
       ),
       child: Icon(
-        Icons.play_arrow,
+        getIcon(),
         color: colors['white'],
         size: 48,
       ),

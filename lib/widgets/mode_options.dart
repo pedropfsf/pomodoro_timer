@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pomodoro_timer/services/colors.dart';
 import 'package:pomodoro_timer/stores/main_store.dart';
 
 final mainStore = MainStore();
 
 class ModeOptions extends StatelessWidget {
-  ModeOptions({super.key, this.value = Ways.focus});
+  ModeOptions({
+    super.key,
+    this.value = Ways.focus,
+    this.onSelectionChanged,
+  });
 
   final dynamic value;
+  final Function(Set<Ways>)? onSelectionChanged;
 
   final style = ButtonStyle(
     foregroundColor: MaterialStatePropertyAll(
@@ -39,27 +43,13 @@ class ModeOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      child: Observer(builder: (_) {
-        return SegmentedButton<Ways>(
-          showSelectedIcon: false,
-          style: style,
-          segments: segments,
-          selected: <Ways>{mainStore.mode},
-          onSelectionChanged: (Set<Ways> newSelection) {
-            if (newSelection.isNotEmpty) {
-              switch (newSelection.first) {
-                case Ways.focus:
-                  mainStore.toFocus();
-                case Ways.shortPause:
-                  mainStore.toShortPause();
-                case Ways.longPause:
-                  mainStore.toLongPause();
-                default:
-              }
-            }
-          },
-        );
-      }),
+      child: SegmentedButton<Ways>(
+        showSelectedIcon: false,
+        style: style,
+        segments: segments,
+        selected: <Ways>{value},
+        onSelectionChanged: onSelectionChanged,
+      ),
     );
   }
 }
