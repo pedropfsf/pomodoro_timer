@@ -17,11 +17,13 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
+    final mode = getMode('short-pause');
+
     return ScreenContainer(
-      color: FocusMode().color,
+      color: mode.color,
       children: [
         const ScreenTitle(text: 'Pomodoro Timer'),
-        ButtonTimer(timer: FocusMode().timer),
+        ButtonTimer(timer: mode.timer),
         const Control()
       ],
     );

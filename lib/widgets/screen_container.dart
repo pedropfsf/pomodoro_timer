@@ -15,8 +15,6 @@ class ScreenContainer extends StatelessWidget {
     final heightStatusBar = MediaQuery.of(context).viewPadding.top;
     final padding = EdgeInsets.only(
       top: heightStatusBar + 64,
-      left: 64,
-      right: 64,
       bottom: 64,
     );
 

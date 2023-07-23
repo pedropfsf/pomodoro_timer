@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro_timer/utils/colors.dart';
+import 'package:pomodoro_timer/widgets/button_arrow.dart';
 
 class ButtonTimer extends StatelessWidget {
   ButtonTimer({super.key, this.timer});
 
   final int? timer;
 
-  final buttonStyle = OutlinedButton.styleFrom(
+  final buttonStyle = TextButton.styleFrom(
     foregroundColor: colors['white'],
     side: BorderSide(color: colors['alpha']!),
-    minimumSize: const Size(250, 250),
+    minimumSize: const Size(200, 200),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(150),
     ),
@@ -22,10 +23,17 @@ class ButtonTimer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: () {},
-      style: buttonStyle,
-      child: Text('00:00', style: textStyle),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        ButtonArrow(direction: 'left'),
+        TextButton(
+          onPressed: () {},
+          style: buttonStyle,
+          child: Text('00:00', style: textStyle),
+        ),
+        ButtonArrow(direction: 'right')
+      ],
     );
   }
 }

@@ -14,6 +14,19 @@ class FocusMode {
   }
 }
 
+class ShortPauseMode {
+  final Color _color = colors['blue']!;
+  final int _timer = 300;
+
+  Color get color {
+    return _color;
+  }
+
+  int get timer {
+    return _timer;
+  }
+}
+
 class LongPauseMode {
   final Color _color = colors['purple']!;
   final int _timer = 900;
@@ -27,15 +40,15 @@ class LongPauseMode {
   }
 }
 
-class ShortPauseMode {
-  final Color _color = colors['blue']!;
-  final int _timer = 300;
-
-  Color get color {
-    return _color;
-  }
-
-  int get timer {
-    return _timer;
+getMode([String value = 'focus']) {
+  switch (value) {
+    case 'focus':
+      return FocusMode();
+    case 'short-pause':
+      return ShortPauseMode();
+    case 'long-pause':
+      return LongPauseMode();
+    default:
+      return FocusMode();
   }
 }
