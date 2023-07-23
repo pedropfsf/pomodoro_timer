@@ -1,35 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:pomodoro_timer/services/colors.dart';
+import 'package:pomodoro_timer/stores/main_store.dart';
 
-enum Ways { focus, short_pause, long_pause }
+final mainStore = MainStore();
 
 class ModeOptions extends StatelessWidget {
-  const ModeOptions({super.key, this.value});
+  ModeOptions({super.key, this.value = Ways.focus});
 
   final dynamic value;
 
+  final style = ButtonStyle(
+    foregroundColor: MaterialStatePropertyAll(
+      colors['white'],
+    ),
+    side: MaterialStatePropertyAll(
+      BorderSide(
+        color: colors['alpha']!,
+      ),
+    ),
+  );
+
+  final segments = const <ButtonSegment<Ways>>[
+    ButtonSegment<Ways>(
+      value: Ways.focus,
+      label: Text('Foco'),
+    ),
+    ButtonSegment<Ways>(
+      value: Ways.short_pause,
+      label: Text('Pausa curta'),
+    ),
+    ButtonSegment<Ways>(
+      value: Ways.long_pause,
+      label: Text('Pausa longa'),
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return SegmentedButton<Ways>(
-      segments: const <ButtonSegment<Ways>>[
-        ButtonSegment<Ways>(
-            value: Ways.focus,
-            label: Text('Foco'),
-            icon: Icon(Icons.calendar_view_day)),
-        ButtonSegment<Ways>(
-            value: Ways.short_pause,
-            label: Text('Pausa curta'),
-            icon: Icon(Icons.calendar_view_week)),
-        ButtonSegment<Ways>(
-            value: Ways.short_pause,
-            label: Text('Pausa longa'),
-            icon: Icon(Icons.calendar_view_month)),
-      ],
-      selected: <Ways>{value},
-      // onSelectionChanged: (Set<Ways> newSelection) {
-      //   setState(() {
-      //     value = newSelection.first;
-      //   });
-      // },
+    return SizedBox(
+      child: Observer(builder: (_) {
+        return SegmentedButton<Ways>(
+          showSelectedIcon: false,
+          style: style,
+          segments: segments,
+          selected: <Ways>{mainStore.mode},
+          onSelectionChanged: (Set<Ways> newSelection) {
+            if (newSelection.isNotEmpty) {
+              switch (newSelection.first) {
+                case Ways.focus:
+                  mainStore.toFocus();
+                case Ways.short_pause:
+                  mainStore.toShortPause();
+                case Ways.long_pause:
+                  mainStore.toLongPause();
+                default:
+              }
+            }
+          },
+        );
+      }),
     );
   }
 }

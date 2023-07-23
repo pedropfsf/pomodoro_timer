@@ -5,14 +5,13 @@ import 'package:flutter/material.dart';
 
 part 'main_store.g.dart';
 
+enum Ways { focus, short_pause, long_pause }
+
 class MainStore = MainStoreBase with _$MainStore;
 
 abstract class MainStoreBase with Store {
   @observable
-  List ways = [FocusMode(), ShortPauseMode(), LongPauseMode()];
-
-  @observable
-  int index = 0;
+  Ways mode = Ways.focus;
 
   @observable
   Color? color = colors['orange'];
@@ -21,10 +20,13 @@ abstract class MainStoreBase with Store {
   int timer = 0;
 
   @action
-  setMode(int index) {
-    final mode = getMode(ways.elementAt(index));
-    color = mode.color;
-    timer = mode.timer;
+  setMode(Ways value) {
+    mode = value;
+  }
+
+  @action
+  setColor(Color value) {
+    color = value;
   }
 
   @action
@@ -33,18 +35,29 @@ abstract class MainStoreBase with Store {
   }
 
   @action
-  next() {
-    if (index < 2) {
-      index++;
-      setMode(index);
-    }
+  toFocus() {
+    final mode = FocusMode();
+
+    setMode(Ways.focus);
+    setColor(mode.color);
+    setTimer(mode.timer);
   }
 
   @action
-  back() {
-    if (index > 0) {
-      index--;
-      setMode(index);
-    }
+  toShortPause() {
+    final mode = ShortPauseMode();
+
+    setMode(Ways.short_pause);
+    setColor(mode.color);
+    setTimer(mode.timer);
+  }
+
+  @action
+  toLongPause() {
+    final mode = LongPauseMode();
+
+    setMode(Ways.long_pause);
+    setColor(mode.color);
+    setTimer(mode.timer);
   }
 }

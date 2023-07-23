@@ -9,33 +9,18 @@ part of 'main_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$MainStore on MainStoreBase, Store {
-  late final _$waysAtom = Atom(name: 'MainStoreBase.ways', context: context);
+  late final _$modeAtom = Atom(name: 'MainStoreBase.mode', context: context);
 
   @override
-  List<dynamic> get ways {
-    _$waysAtom.reportRead();
-    return super.ways;
+  Ways get mode {
+    _$modeAtom.reportRead();
+    return super.mode;
   }
 
   @override
-  set ways(List<dynamic> value) {
-    _$waysAtom.reportWrite(value, super.ways, () {
-      super.ways = value;
-    });
-  }
-
-  late final _$indexAtom = Atom(name: 'MainStoreBase.index', context: context);
-
-  @override
-  int get index {
-    _$indexAtom.reportRead();
-    return super.index;
-  }
-
-  @override
-  set index(int value) {
-    _$indexAtom.reportWrite(value, super.index, () {
-      super.index = value;
+  set mode(Ways value) {
+    _$modeAtom.reportWrite(value, super.mode, () {
+      super.mode = value;
     });
   }
 
@@ -73,11 +58,22 @@ mixin _$MainStore on MainStoreBase, Store {
       ActionController(name: 'MainStoreBase', context: context);
 
   @override
-  dynamic setMode(int index) {
+  dynamic setMode(Ways value) {
     final _$actionInfo = _$MainStoreBaseActionController.startAction(
         name: 'MainStoreBase.setMode');
     try {
-      return super.setMode(index);
+      return super.setMode(value);
+    } finally {
+      _$MainStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setColor(Color value) {
+    final _$actionInfo = _$MainStoreBaseActionController.startAction(
+        name: 'MainStoreBase.setColor');
+    try {
+      return super.setColor(value);
     } finally {
       _$MainStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -95,22 +91,33 @@ mixin _$MainStore on MainStoreBase, Store {
   }
 
   @override
-  dynamic next() {
-    final _$actionInfo =
-        _$MainStoreBaseActionController.startAction(name: 'MainStoreBase.next');
+  dynamic toFocus() {
+    final _$actionInfo = _$MainStoreBaseActionController.startAction(
+        name: 'MainStoreBase.toFocus');
     try {
-      return super.next();
+      return super.toFocus();
     } finally {
       _$MainStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic back() {
-    final _$actionInfo =
-        _$MainStoreBaseActionController.startAction(name: 'MainStoreBase.back');
+  dynamic toShortPause() {
+    final _$actionInfo = _$MainStoreBaseActionController.startAction(
+        name: 'MainStoreBase.toShortPause');
     try {
-      return super.back();
+      return super.toShortPause();
+    } finally {
+      _$MainStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic toLongPause() {
+    final _$actionInfo = _$MainStoreBaseActionController.startAction(
+        name: 'MainStoreBase.toLongPause');
+    try {
+      return super.toLongPause();
     } finally {
       _$MainStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -119,8 +126,7 @@ mixin _$MainStore on MainStoreBase, Store {
   @override
   String toString() {
     return '''
-ways: ${ways},
-index: ${index},
+mode: ${mode},
 color: ${color},
 timer: ${timer}
     ''';
