@@ -12,7 +12,7 @@ class ButtonTimer extends StatelessWidget {
   final buttonStyle = TextButton.styleFrom(
     foregroundColor: colors['white'],
     side: BorderSide(color: colors['alpha']!),
-    minimumSize: const Size(200, 200),
+    minimumSize: const Size(270, 270),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(150),
     ),

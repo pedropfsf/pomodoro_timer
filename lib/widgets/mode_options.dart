@@ -27,11 +27,11 @@ class ModeOptions extends StatelessWidget {
       label: Text('Foco'),
     ),
     ButtonSegment<Ways>(
-      value: Ways.short_pause,
+      value: Ways.shortPause,
       label: Text('Pausa curta'),
     ),
     ButtonSegment<Ways>(
-      value: Ways.long_pause,
+      value: Ways.longPause,
       label: Text('Pausa longa'),
     ),
   ];
@@ -50,9 +50,9 @@ class ModeOptions extends StatelessWidget {
               switch (newSelection.first) {
                 case Ways.focus:
                   mainStore.toFocus();
-                case Ways.short_pause:
+                case Ways.shortPause:
                   mainStore.toShortPause();
-                case Ways.long_pause:
+                case Ways.longPause:
                   mainStore.toLongPause();
                 default:
               }

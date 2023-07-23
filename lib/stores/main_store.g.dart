@@ -58,39 +58,6 @@ mixin _$MainStore on MainStoreBase, Store {
       ActionController(name: 'MainStoreBase', context: context);
 
   @override
-  dynamic setMode(Ways value) {
-    final _$actionInfo = _$MainStoreBaseActionController.startAction(
-        name: 'MainStoreBase.setMode');
-    try {
-      return super.setMode(value);
-    } finally {
-      _$MainStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic setColor(Color value) {
-    final _$actionInfo = _$MainStoreBaseActionController.startAction(
-        name: 'MainStoreBase.setColor');
-    try {
-      return super.setColor(value);
-    } finally {
-      _$MainStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic setTimer(int value) {
-    final _$actionInfo = _$MainStoreBaseActionController.startAction(
-        name: 'MainStoreBase.setTimer');
-    try {
-      return super.setTimer(value);
-    } finally {
-      _$MainStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   dynamic toFocus() {
     final _$actionInfo = _$MainStoreBaseActionController.startAction(
         name: 'MainStoreBase.toFocus');
