@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro_timer/utils/ways.dart';
-import 'package:pomodoro_timer/widgets/button_play.dart';
+import 'package:pomodoro_timer/widgets/button_timer.dart';
+import 'package:pomodoro_timer/widgets/control.dart';
 import 'package:pomodoro_timer/widgets/screen_container.dart';
 import 'package:pomodoro_timer/widgets/screen_title.dart';
 
@@ -20,7 +21,8 @@ class _AppState extends State<App> {
       color: FocusMode().color,
       children: [
         const ScreenTitle(text: 'Pomodoro Timer'),
-        ButtonPlay(timer: FocusMode().timer)
+        ButtonTimer(timer: FocusMode().timer),
+        const Control()
       ],
     );
   }
