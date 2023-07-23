@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro_timer/utils/colors.dart';
+import 'package:pomodoro_timer/services/colors.dart';
 
 class ButtonReplay extends StatelessWidget {
   const ButtonReplay({super.key});

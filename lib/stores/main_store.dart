@@ -1,5 +1,7 @@
 import 'package:mobx/mobx.dart';
-import 'package:pomodoro_timer/utils/ways.dart';
+import 'package:pomodoro_timer/services/colors.dart';
+import 'package:pomodoro_timer/services/ways.dart';
+import 'package:flutter/material.dart';
 
 part 'main_store.g.dart';
 
@@ -13,34 +15,36 @@ abstract class MainStoreBase with Store {
   int index = 0;
 
   @observable
-  Mode currentMode = getMode('focus');
+  Color? color = colors['orange'];
 
   @observable
-  int currentTimer = 0;
+  int timer = 0;
 
   @action
-  setCurrentMode(Mode value) {
-    currentMode = value;
+  setMode(int index) {
+    final mode = getMode(ways.elementAt(index));
+    color = mode.color;
+    timer = mode.timer;
   }
 
   @action
-  setCurrentTimer(int value) {
-    currentTimer = value;
+  setTimer(int value) {
+    timer = value;
   }
 
   @action
   next() {
     if (index < 2) {
       index++;
+      setMode(index);
     }
-    setCurrentMode(ways.elementAt(index));
   }
 
   @action
   back() {
     if (index > 0) {
       index--;
+      setMode(index);
     }
-    setCurrentMode(ways.elementAt(index));
   }
 }

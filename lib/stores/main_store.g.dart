@@ -39,35 +39,33 @@ mixin _$MainStore on MainStoreBase, Store {
     });
   }
 
-  late final _$currentModeAtom =
-      Atom(name: 'MainStoreBase.currentMode', context: context);
+  late final _$colorAtom = Atom(name: 'MainStoreBase.color', context: context);
 
   @override
-  Mode get currentMode {
-    _$currentModeAtom.reportRead();
-    return super.currentMode;
+  Color? get color {
+    _$colorAtom.reportRead();
+    return super.color;
   }
 
   @override
-  set currentMode(Mode value) {
-    _$currentModeAtom.reportWrite(value, super.currentMode, () {
-      super.currentMode = value;
+  set color(Color? value) {
+    _$colorAtom.reportWrite(value, super.color, () {
+      super.color = value;
     });
   }
 
-  late final _$currentTimerAtom =
-      Atom(name: 'MainStoreBase.currentTimer', context: context);
+  late final _$timerAtom = Atom(name: 'MainStoreBase.timer', context: context);
 
   @override
-  int get currentTimer {
-    _$currentTimerAtom.reportRead();
-    return super.currentTimer;
+  int get timer {
+    _$timerAtom.reportRead();
+    return super.timer;
   }
 
   @override
-  set currentTimer(int value) {
-    _$currentTimerAtom.reportWrite(value, super.currentTimer, () {
-      super.currentTimer = value;
+  set timer(int value) {
+    _$timerAtom.reportWrite(value, super.timer, () {
+      super.timer = value;
     });
   }
 
@@ -75,22 +73,22 @@ mixin _$MainStore on MainStoreBase, Store {
       ActionController(name: 'MainStoreBase', context: context);
 
   @override
-  dynamic setCurrentMode(Mode value) {
+  dynamic setMode(int index) {
     final _$actionInfo = _$MainStoreBaseActionController.startAction(
-        name: 'MainStoreBase.setCurrentMode');
+        name: 'MainStoreBase.setMode');
     try {
-      return super.setCurrentMode(value);
+      return super.setMode(index);
     } finally {
       _$MainStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic setCurrentTimer(int value) {
+  dynamic setTimer(int value) {
     final _$actionInfo = _$MainStoreBaseActionController.startAction(
-        name: 'MainStoreBase.setCurrentTimer');
+        name: 'MainStoreBase.setTimer');
     try {
-      return super.setCurrentTimer(value);
+      return super.setTimer(value);
     } finally {
       _$MainStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -123,8 +121,8 @@ mixin _$MainStore on MainStoreBase, Store {
     return '''
 ways: ${ways},
 index: ${index},
-currentMode: ${currentMode},
-currentTimer: ${currentTimer}
+color: ${color},
+timer: ${timer}
     ''';
   }
 }

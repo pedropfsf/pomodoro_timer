@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro_timer/stores/main_store.dart';
-import 'package:pomodoro_timer/utils/colors.dart';
-import 'package:pomodoro_timer/utils/timer.dart';
-import 'package:pomodoro_timer/widgets/button_arrow.dart';
+import 'package:pomodoro_timer/services/colors.dart';
+import 'package:pomodoro_timer/services/timer.dart';
 
 final mainStore = MainStore();
 
@@ -31,27 +30,10 @@ class ButtonTimer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        ButtonArrow(
-          direction: 'left',
-          onPressed: () {
-            mainStore.next();
-          },
-        ),
-        TextButton(
-          onPressed: () {},
-          style: buttonStyle,
-          child: Text(getTimer(), style: textStyle),
-        ),
-        ButtonArrow(
-          direction: 'right',
-          onPressed: () {
-            mainStore.back();
-          },
-        )
-      ],
+    return TextButton(
+      onPressed: () {},
+      style: buttonStyle,
+      child: Text(getTimer(), style: textStyle),
     );
   }
 }

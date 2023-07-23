@@ -8,8 +8,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 main() => runApp(const App());
 
-final mainStore = MainStore();
-
 class App extends StatefulWidget {
   const App({super.key});
 
@@ -18,14 +16,16 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  final mainStore = MainStore();
+
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
       return ScreenContainer(
-        color: mainStore.currentMode.color,
+        color: mainStore.color,
         children: [
           const ScreenTitle(text: 'Pomodoro Timer'),
-          ButtonTimer(timer: mainStore.currentMode.timer),
+          ButtonTimer(timer: mainStore.timer),
           const Control()
         ],
       );
