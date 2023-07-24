@@ -23,7 +23,7 @@ abstract class MainStoreBase with Store {
   Color? color = colors['orange'];
 
   @observable
-  int timer = 5;
+  int timer = 1500;
 
   @observable
   bool isPause = true;
