@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pomodoro_timer/stores/main_store.dart';
+
+final mainStore = MainStore();
 
 class ScreenContainer extends StatelessWidget {
   const ScreenContainer({
@@ -14,15 +17,14 @@ class ScreenContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final heightStatusBar = MediaQuery.of(context).viewPadding.top;
     final padding = EdgeInsets.only(
-      top: heightStatusBar + 24,
-      left: 24,
-      right: 24,
-      bottom: 24,
+      top: heightStatusBar + 64,
+      bottom: 64,
     );
 
     return MaterialApp(
       home: Scaffold(
-        body: Container(
+        body: AnimatedContainer(
+          duration: const Duration(milliseconds: 500),
           width: double.infinity,
           color: color,
           padding: padding,

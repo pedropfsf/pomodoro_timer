@@ -1,31 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro_timer/utils/colors.dart';
+import 'package:pomodoro_timer/services/colors.dart';
 
 class ButtonPlay extends StatelessWidget {
-  ButtonPlay({super.key, this.timer});
+  const ButtonPlay({
+    super.key,
+    this.isPause,
+    this.onPlay,
+  });
 
-  final int? timer;
+  final bool? isPause;
+  final Function()? onPlay;
 
-  final buttonStyle = OutlinedButton.styleFrom(
-    foregroundColor: colors['white'],
-    side: BorderSide(color: colors['alpha']!),
-    minimumSize: const Size(200, 200),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(150),
-    ),
-    padding: const EdgeInsets.all(32),
-  );
+  IconData getIcon() {
+    if (isPause == null) {
+      return Icons.play_arrow;
+    }
 
-  final textStyle = const TextStyle(
-    fontSize: 58,
-  );
+    if (isPause == true) {
+      return Icons.play_arrow;
+    }
+
+    return Icons.pause;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: () {},
-      style: buttonStyle,
-      child: Text('00:00', style: textStyle),
+    return ElevatedButton(
+      onPressed: onPlay,
+      style: IconButton.styleFrom(
+        backgroundColor: colors['alpha'],
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(100),
+          ),
+        ),
+        padding: const EdgeInsets.all(10),
+      ),
+      child: Icon(
+        getIcon(),
+        color: colors['white'],
+        size: 48,
+      ),
     );
   }
 }
