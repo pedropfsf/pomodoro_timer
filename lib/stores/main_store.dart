@@ -69,6 +69,7 @@ abstract class MainStoreBase with Store {
     isPause = false;
     const duration = Duration(seconds: 1);
 
+    interval?.cancel();
     interval = Timer.periodic(duration, (currentInterval) {
       timer -= 1;
       if (timer <= 0) {
