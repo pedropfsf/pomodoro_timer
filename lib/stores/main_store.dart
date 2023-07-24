@@ -28,6 +28,9 @@ abstract class MainStoreBase with Store {
   @observable
   bool isPause = true;
 
+  @observable
+  AudioPlayer player = AudioPlayer();
+
   @action
   toFocus() {
     final mode = FocusMode();
@@ -36,6 +39,7 @@ abstract class MainStoreBase with Store {
     timer = mode.timer;
     this.mode = Ways.focus;
     pause();
+    player.stop();
   }
 
   @action
@@ -46,6 +50,7 @@ abstract class MainStoreBase with Store {
     timer = mode.timer;
     this.mode = Ways.shortPause;
     pause();
+    player.stop();
   }
 
   @action
@@ -56,6 +61,7 @@ abstract class MainStoreBase with Store {
     timer = mode.timer;
     this.mode = Ways.longPause;
     pause();
+    player.stop();
   }
 
   @action
@@ -76,18 +82,19 @@ abstract class MainStoreBase with Store {
   @action
   pause() {
     isPause = true;
+    player.stop();
     interval?.cancel();
   }
 
   @action
   touch() {
-    final player = AudioPlayer();
     player.play(AssetSource('sound.mp3'));
   }
 
   @action
   replay() {
     pause();
+    player.stop();
     switch (mode) {
       case Ways.focus:
         final mode = FocusMode();
