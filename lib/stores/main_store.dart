@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pomodoro_timer/services/colors.dart';
 import 'package:pomodoro_timer/services/ways.dart';
@@ -22,7 +23,7 @@ abstract class MainStoreBase with Store {
   Color? color = colors['orange'];
 
   @observable
-  int timer = 1500;
+  int timer = 5;
 
   @observable
   bool isPause = true;
@@ -34,6 +35,7 @@ abstract class MainStoreBase with Store {
     color = mode.color;
     timer = mode.timer;
     this.mode = Ways.focus;
+    pause();
   }
 
   @action
@@ -43,6 +45,7 @@ abstract class MainStoreBase with Store {
     color = mode.color;
     timer = mode.timer;
     this.mode = Ways.shortPause;
+    pause();
   }
 
   @action
@@ -52,14 +55,21 @@ abstract class MainStoreBase with Store {
     color = mode.color;
     timer = mode.timer;
     this.mode = Ways.longPause;
+    pause();
   }
 
   @action
   play() {
     isPause = false;
-    const duration = Duration(seconds: 2);
-    interval = Timer(duration, () {
+    const duration = Duration(seconds: 1);
+
+    interval = Timer.periodic(duration, (currentInterval) {
       timer -= 1;
+      if (timer <= 0) {
+        currentInterval.cancel();
+        isPause = true;
+        touch();
+      }
     });
   }
 
@@ -67,5 +77,28 @@ abstract class MainStoreBase with Store {
   pause() {
     isPause = true;
     interval?.cancel();
+  }
+
+  @action
+  touch() {
+    final player = AudioPlayer();
+    player.play(AssetSource('sound.mp3'));
+  }
+
+  @action
+  replay() {
+    pause();
+    switch (mode) {
+      case Ways.focus:
+        final mode = FocusMode();
+        timer = mode.timer;
+      case Ways.shortPause:
+        final mode = ShortPauseMode();
+        timer = mode.timer;
+      case Ways.longPause:
+        final mode = LongPauseMode();
+        timer = mode.timer;
+      default:
+    }
   }
 }

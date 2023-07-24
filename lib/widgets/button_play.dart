@@ -17,10 +17,10 @@ class ButtonPlay extends StatelessWidget {
     }
 
     if (isPause == true) {
-      return Icons.pause;
+      return Icons.play_arrow;
     }
 
-    return Icons.play_arrow;
+    return Icons.pause;
   }
 
   @override

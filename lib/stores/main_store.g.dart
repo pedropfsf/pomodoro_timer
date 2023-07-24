@@ -145,6 +145,28 @@ mixin _$MainStore on MainStoreBase, Store {
   }
 
   @override
+  dynamic touch() {
+    final _$actionInfo = _$MainStoreBaseActionController.startAction(
+        name: 'MainStoreBase.touch');
+    try {
+      return super.touch();
+    } finally {
+      _$MainStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic replay() {
+    final _$actionInfo = _$MainStoreBaseActionController.startAction(
+        name: 'MainStoreBase.replay');
+    try {
+      return super.replay();
+    } finally {
+      _$MainStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 interval: ${interval},

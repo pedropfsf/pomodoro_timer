@@ -8,9 +8,11 @@ class ButtonTimer extends StatelessWidget {
   ButtonTimer({
     super.key,
     required this.text,
+    this.onPlay,
   });
 
   final String text;
+  final Function()? onPlay;
 
   final buttonStyle = TextButton.styleFrom(
     foregroundColor: colors['white'],
@@ -29,7 +31,7 @@ class ButtonTimer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: onPlay,
       style: buttonStyle,
       child: Text(
         text,

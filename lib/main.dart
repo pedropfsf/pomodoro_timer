@@ -51,8 +51,15 @@ class _AppState extends State<App> {
             value: mainStore.mode,
             onSelectionChanged: changeMode,
           ),
-          ButtonTimer(text: getTimerBySeconds(mainStore.timer)),
-          Control(isPause: mainStore.isPause, onPlay: toggle),
+          ButtonTimer(
+            text: getTimerBySeconds(mainStore.timer),
+            onPlay: mainStore.play,
+          ),
+          Control(
+            isPause: mainStore.isPause,
+            onPlay: toggle,
+            onReplay: mainStore.replay,
+          ),
         ],
       );
     });
